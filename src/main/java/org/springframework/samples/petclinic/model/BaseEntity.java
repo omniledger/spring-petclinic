@@ -15,12 +15,16 @@
  */
 package org.springframework.samples.petclinic.model;
 
-import java.io.Serializable;
-
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
+
+import java.io.Serializable;
+import java.util.UUID;
 
 /**
  * Simple JavaBean domain object with an id property. Used as a base class for objects
@@ -33,14 +37,16 @@ import jakarta.persistence.MappedSuperclass;
 public class BaseEntity implements Serializable {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	@GenericGenerator(name = "uuid2", strategy = "uuid2")
+	@GeneratedValue(strategy = GenerationType.IDENTITY, generator = "uuid2")
+	@JdbcTypeCode(SqlTypes.VARCHAR)
+	private UUID id;
 
-	public Integer getId() {
+	public UUID getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(UUID id) {
 		this.id = id;
 	}
 

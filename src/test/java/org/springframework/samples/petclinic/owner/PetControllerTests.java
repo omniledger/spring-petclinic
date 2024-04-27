@@ -25,8 +25,9 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
-import org.springframework.test.context.aot.DisabledInAotMode;
 import org.springframework.test.web.servlet.MockMvc;
+
+import java.util.UUID;
 
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -43,12 +44,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(value = PetController.class,
 		includeFilters = @ComponentScan.Filter(value = PetTypeFormatter.class, type = FilterType.ASSIGNABLE_TYPE))
 @DisabledInNativeImage
-@DisabledInAotMode
 class PetControllerTests {
 
-	private static final int TEST_OWNER_ID = 1;
+	private static final UUID TEST_OWNER_ID = UUID.randomUUID();
 
-	private static final int TEST_PET_ID = 1;
+	private static final UUID TEST_PET_ID = UUID.randomUUID();
 
 	@Autowired
 	private MockMvc mockMvc;
@@ -59,7 +59,7 @@ class PetControllerTests {
 	@BeforeEach
 	void setup() {
 		PetType cat = new PetType();
-		cat.setId(3);
+		cat.setId(UUID.randomUUID());
 		cat.setName("hamster");
 		given(this.owners.findPetTypes()).willReturn(Lists.newArrayList(cat));
 		Owner owner = new Owner();

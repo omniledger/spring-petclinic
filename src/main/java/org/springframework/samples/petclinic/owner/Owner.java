@@ -15,23 +15,16 @@
  */
 package org.springframework.samples.petclinic.owner;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Digits;
+import jakarta.validation.constraints.NotBlank;
 import org.springframework.core.style.ToStringCreator;
 import org.springframework.samples.petclinic.model.Person;
 import org.springframework.util.Assert;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OrderBy;
-import jakarta.persistence.Table;
-import jakarta.validation.constraints.Digits;
-import jakarta.validation.constraints.NotBlank;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * Simple JavaBean domain object representing an owner.
@@ -112,10 +105,10 @@ public class Owner extends Person {
 	 * @param id to test
 	 * @return a pet if pet id is already in use
 	 */
-	public Pet getPet(Integer id) {
+	public Pet getPet(UUID id) {
 		for (Pet pet : getPets()) {
 			if (!pet.isNew()) {
-				Integer compId = pet.getId();
+				UUID compId = pet.getId();
 				if (compId.equals(id)) {
 					return pet;
 				}
@@ -159,7 +152,7 @@ public class Owner extends Person {
 	 * @param petId the identifier of the {@link Pet}, must not be {@literal null}.
 	 * @param visit the visit to add, must not be {@literal null}.
 	 */
-	public void addVisit(Integer petId, Visit visit) {
+	public void addVisit(UUID petId, Visit visit) {
 
 		Assert.notNull(petId, "Pet identifier must not be null!");
 		Assert.notNull(visit, "Visit must not be null!");

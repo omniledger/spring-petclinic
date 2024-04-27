@@ -29,8 +29,9 @@ import org.junit.jupiter.api.condition.DisabledInNativeImage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.aot.DisabledInAotMode;
 import org.springframework.test.web.servlet.MockMvc;
+
+import java.util.UUID;
 
 /**
  * Test class for {@link VisitController}
@@ -39,12 +40,11 @@ import org.springframework.test.web.servlet.MockMvc;
  */
 @WebMvcTest(VisitController.class)
 @DisabledInNativeImage
-@DisabledInAotMode
 class VisitControllerTests {
 
-	private static final int TEST_OWNER_ID = 1;
+	private static final UUID TEST_OWNER_ID = UUID.randomUUID();
 
-	private static final int TEST_PET_ID = 1;
+	private static final UUID TEST_PET_ID = UUID.randomUUID();
 
 	@Autowired
 	private MockMvc mockMvc;

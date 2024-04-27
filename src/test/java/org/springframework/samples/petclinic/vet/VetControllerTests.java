@@ -26,10 +26,11 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.aot.DisabledInAotMode;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+
+import java.util.UUID;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
@@ -42,7 +43,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @WebMvcTest(VetController.class)
 @DisabledInNativeImage
-@DisabledInAotMode
 class VetControllerTests {
 
 	@Autowired
@@ -55,7 +55,7 @@ class VetControllerTests {
 		Vet james = new Vet();
 		james.setFirstName("James");
 		james.setLastName("Carter");
-		james.setId(1);
+		james.setId(UUID.randomUUID());
 		return james;
 	}
 
@@ -63,9 +63,9 @@ class VetControllerTests {
 		Vet helen = new Vet();
 		helen.setFirstName("Helen");
 		helen.setLastName("Leary");
-		helen.setId(2);
+		helen.setId(UUID.randomUUID());
 		Specialty radiology = new Specialty();
-		radiology.setId(1);
+		radiology.setId(UUID.randomUUID());
 		radiology.setName("radiology");
 		helen.addSpecialty(radiology);
 		return helen;

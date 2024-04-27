@@ -32,6 +32,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.UUID;
 
 import org.assertj.core.util.Lists;
 import org.hamcrest.BaseMatcher;
@@ -46,7 +47,6 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
-import org.springframework.test.context.aot.DisabledInAotMode;
 import org.springframework.test.web.servlet.MockMvc;
 
 /**
@@ -56,10 +56,9 @@ import org.springframework.test.web.servlet.MockMvc;
  */
 @WebMvcTest(OwnerController.class)
 @DisabledInNativeImage
-@DisabledInAotMode
 class OwnerControllerTests {
 
-	private static final int TEST_OWNER_ID = 1;
+	private static final UUID TEST_OWNER_ID = UUID.randomUUID();
 
 	@Autowired
 	private MockMvc mockMvc;
@@ -82,7 +81,7 @@ class OwnerControllerTests {
 		max.setName("Max");
 		max.setBirthDate(LocalDate.now());
 		george.addPet(max);
-		max.setId(1);
+		max.setId(UUID.randomUUID());
 		return george;
 	};
 
