@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="error" shutdownHook="disable">
+
+	<Appenders>
+		<Console name="stdlogs" target="SYSTEM_OUT">
+			<PatternLayout pattern=" [%-10.10t] [%-6.6X{tracing_id}] [%d] %-5level %-40.40logger{36} - %msg%n"/>
+		</Console>
+
+		<RollingFile
+			name="stdFile"
+			fileName="target/std_out_mysql.log"
+			append="false"
+			filePattern="target/std_out-%d{HH_mm_ss}.log.gz"
+		>
+			<PatternLayout pattern=" [%-10.10t] [%-6.6X{tracing_id}] [%d] %-5level %-40.40logger{36} - %msg%n"/>
+			<SizeBasedTriggeringPolicy size="1000 MB" />
+		</RollingFile >
+	</Appenders>
+	<Loggers>
+		<!-- Logs to console only by default, only logs our own messages in a file -->
+		<Root level="info">
+			<!-- don't log debug to STDOUT -->
+			<AppenderRef ref="stdlogs" level="info" />
+			<AppenderRef ref="stdFile" level="trace" />
+		</Root>
+
+		<Logger name="org.apache.kafka.common.utils.AppInfoParser" level="error"/>
+
+		<Logger name="org.apache" level="warn"/>
+		<Logger name="com.netflix.spectator" level="error"/>
+		<Logger name="org.apache.kafka" level="info"/>
+		<Logger name="com.mchange.v2" level="warn"/>
+
+		<Logger name="org.testcontainers" level="info"/>
+		<Logger name="com.github.dockerjava" level="info"/>
+
+		<!-- omni root, everything inherits from this -->
+		<Logger name="io.omniledger" level="debug"/>
+		<Logger name="io.omniledger.client.api.ClientSchema" level="trace"/>
+		<Logger name="io.omniledger.shared.BasicJobScheduler" level="trace"/>
+		<Logger name="io.omniledger.sync" level="trace"/>
+<!--
+		<Logger name="io.omniledger.sync.worker.SyncTopicWorker" level="trace"/>
+-->
+	</Loggers>
+</Configuration>

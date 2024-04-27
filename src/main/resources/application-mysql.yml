@@ -1,0 +1,58 @@
+logging.config: src/main/resources/log4j2-mysql.xml
+
+spring:
+  datasource:
+    url: "jdbc:mysql://localhost/petclinic"
+    username: "petclinic"
+    password: "petclinic"
+
+  jpa:
+    ddl-auto: "none"
+
+  kafka:
+    bootstrap_servers:
+      - "localhost:19092"
+
+    producer:
+      key-serializer: "org.apache.kafka.common.serialization.StringSerializer"
+      value-serializer: "org.apache.kafka.common.serialization.ByteArraySerializer"
+
+    consumer:
+      key-deserializer: "org.apache.kafka.common.serialization.StringDeserializer"
+      value-deserializer: "org.apache.kafka.common.serialization.ByteArrayDeserializer"
+
+
+o8r:
+  contributor:
+
+    # name of contributor
+    # always required
+    id: "mysql-1"
+
+    # The partition through which this VM receives its messages from the platform
+    # always required
+    partition_id: 0
+
+    # The highest partition-id of the topic.
+    # required if contributor-topic needs to be created
+    highest_partition: 5
+
+    # checks against existing registrations and registers contributor to missing ones
+    # error if contributor already has more than what's listed here
+    namespaces:
+      - "petclinic"
+
+  # The namespaces listed here must exist in the catalogue. If the namespace exists, we
+  # don't test the schema-file, if it doesn't, we create it based o it
+  catalogue:
+    namespaces:
+      - name: "petclinic"
+        schema_file: "petclinic_schema.yaml"
+        highest_node_partition: 6
+        highest_data_partition: 3
+
+  platform.path_to_files: "C:/tmp/nodes/mysql-1"
+
+  client.dialect: "io.omniledger.client.sql.mysql.MySQLClientDialect"
+
+  sync.dialect: "io.omniledger.sync.mysql.MySQLSyncDialect"

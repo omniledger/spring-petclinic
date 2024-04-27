@@ -1,0 +1,154 @@
+- name: owners
+  id: 0
+  pk_columns:
+  - id
+  columns:
+  - name: first_name
+    sql_type: VARCHAR
+    width: 120
+    allows_null: true
+    auto_incr: false
+  - name: address
+    sql_type: VARCHAR
+    width: 1020
+    allows_null: true
+    auto_incr: false
+  - name: telephone
+    sql_type: VARCHAR
+    width: 80
+    allows_null: true
+    auto_incr: false
+  - name: last_name
+    sql_type: VARCHAR
+    width: 120
+    allows_null: true
+    auto_incr: false
+  - name: city
+    sql_type: VARCHAR
+    width: 320
+    allows_null: true
+    auto_incr: false
+  - name: id
+    sql_type: VARCHAR
+    width: 144
+    allows_null: false
+    auto_incr: false
+- name: pets
+  id: 1
+  pk_columns:
+  - id
+  columns:
+  - name: name
+    sql_type: VARCHAR
+    width: 120
+    allows_null: true
+    auto_incr: false
+  - name: type_id
+    sql_type: VARCHAR
+    width: 144
+    allows_null: false
+    auto_incr: false
+  - auto_incr: false
+    name: birth_date
+    sql_type: DATE
+    allows_null: true
+  - name: owner_id
+    sql_type: VARCHAR
+    width: 144
+    allows_null: true
+    auto_incr: false
+  - name: id
+    sql_type: VARCHAR
+    width: 144
+    allows_null: false
+    auto_incr: false
+- name: specialties
+  id: 2
+  pk_columns:
+  - id
+  columns:
+  - name: name
+    sql_type: VARCHAR
+    width: 320
+    allows_null: true
+    auto_incr: false
+  - name: id
+    sql_type: VARCHAR
+    width: 144
+    allows_null: false
+    auto_incr: false
+- name: types
+  id: 3
+  pk_columns:
+  - id
+  columns:
+  - name: name
+    sql_type: VARCHAR
+    width: 320
+    allows_null: true
+    auto_incr: false
+  - name: id
+    sql_type: VARCHAR
+    width: 144
+    allows_null: false
+    auto_incr: false
+- name: vet_specialties
+  id: 4
+  pk_columns:
+    - specialty_id
+    - vet_id
+  columns:
+  - name: specialty_id
+    sql_type: VARCHAR
+    width: 144
+    allows_null: false
+    auto_incr: false
+  - name: vet_id
+    sql_type: VARCHAR
+    width: 144
+    allows_null: false
+    auto_incr: false
+- name: vets
+  id: 5
+  pk_columns:
+  - id
+  columns:
+  - name: first_name
+    sql_type: VARCHAR
+    width: 120
+    allows_null: true
+    auto_incr: false
+  - name: last_name
+    sql_type: VARCHAR
+    width: 120
+    allows_null: true
+    auto_incr: false
+  - name: id
+    sql_type: VARCHAR
+    width: 144
+    allows_null: false
+    auto_incr: false
+- name: visits
+  id: 6
+  pk_columns:
+  - id
+  columns:
+  - name: description
+    sql_type: VARCHAR
+    width: 1020
+    allows_null: true
+    auto_incr: false
+  - name: pet_id
+    sql_type: VARCHAR
+    width: 144
+    allows_null: true
+    auto_incr: false
+  - auto_incr: false
+    name: visit_date
+    sql_type: DATE
+    allows_null: true
+  - name: id
+    sql_type: VARCHAR
+    width: 144
+    allows_null: false
+    auto_incr: false
